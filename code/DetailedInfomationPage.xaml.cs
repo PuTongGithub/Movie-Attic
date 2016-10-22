@@ -31,6 +31,7 @@ namespace MovieCollection
         private ObservableCollection<ForTagsDataBind> AddTagsList;
         private Movie movie;
         private List<string> SuggestTags;
+        private Search searchResult;
         public DetailedInfomationPage()
         {
             this.InitializeComponent();
@@ -45,8 +46,14 @@ namespace MovieCollection
                 LodingRing.IsActive = true;
                 LodingRing.Visibility = Visibility.Visible;
 
+                var TmdbData = await GetTMDBdata.GetData(searchResult.id.ToString());
+                imdbID = TmdbData.imdb_id;
+
                 movie = await GetMovie.GetData(imdbID);
-                BackgroundImage.Source = new BitmapImage(new Uri(movie.Poster, UriKind.Absolute));
+
+                movie.Poster = searchResult.poster_path;
+
+                BackgroundImage.Source = new BitmapImage(new Uri(searchResult.backdrop_path, UriKind.Absolute));
                 PosterImage.Source = new BitmapImage(new Uri(movie.Poster, UriKind.Absolute));
 
                 TitleTextBlock.Text = movie.Title;
@@ -78,8 +85,8 @@ namespace MovieCollection
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var search = (Search)e.Parameter;
-            imdbID = search.imdbID;
+            searchResult = (Search)e.Parameter;
+
             getData();
 
             var test = SQLiteOperation.QueryData(imdbID);
@@ -184,6 +191,8 @@ namespace MovieCollection
             NewCollectedMovie.FilmCritic = FilmCriticTextBox.Text;
 
             NewCollectedMovie.CollectionDate = DateTime.Now.ToLocalTime().ToString();
+
+            NewCollectedMovie.Backdrop = searchResult.backdrop_path;
 
             SQLiteOperation.InsertData(NewCollectedMovie);
 

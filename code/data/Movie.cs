@@ -69,6 +69,7 @@ namespace MovieCollection.data
         public string RatingStory { get; set; }
         public string RatingMusic { get; set; }
         public string RatingPerformance { get; set; }
+        public string Backdrop { get; set; }
 
         public CollectedMovie() { }
 

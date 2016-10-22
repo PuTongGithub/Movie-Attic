@@ -61,9 +61,6 @@ namespace MovieCollection
                     Task t = GetSearchList.GetData(searchList, SearchBox.Text);
                     await t;
                     countPage++;
-                    t = GetSearchList.GetData(searchList, SearchBox.Text, countPage + 1);
-                    await t;
-                    countPage++;
                 }
                 catch (Exception) { }
                 finally
