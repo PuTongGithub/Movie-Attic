@@ -61,8 +61,6 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <WebView Name="MyWebView" />
-
         <Button Name="HamburgerButton"
                     FontFamily="Segoe MDL2 Assets"
                     Content="&#xE700;"

@@ -14,7 +14,16 @@
             <Setter Property="FontSize" Value="20" />
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="Margin" Value="5,3,5,3" />
-            <Setter Property="MaxWidth" Value="350" />
+            <Setter Property="MaxWidth" Value="420" />
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="MovieInfomationTitleTextBlockStyle">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="5,3,5,3" />
+            <Setter Property="MaxWidth" Value="420" />
+            <Setter Property="FontWeight" Value="Bold" />
         </Style>
     </Page.Resources>
 
@@ -24,11 +33,38 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="400"/>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="2*" MinWidth="400" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.ColumnSpan="2">
+        <TextBlock Name="NoCollectionHit"
+                   Text="You don't have any collection!"
+                   Grid.ColumnSpan="2"
+                   Visibility="Collapsed"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   FontSize="30"
+                   Margin="20"
+                   />
+
+        <TextBlock Name="GoSearchHit"
+                   Text="Please add your movie collection by Search."
+                   Foreground="White"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="2"
+                   Visibility="Collapsed"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   FontSize="30"
+                   Margin="20"
+                   Canvas.ZIndex="100"
+                   />
+
+        <Grid Grid.ColumnSpan="2"
+              Name="ComboBoxesGrid"
+              Visibility="Collapsed"
+              >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -42,8 +78,8 @@
                       >
                 <ComboBoxItem Content="Sort by..." IsSelected="True" />
                 <ComboBoxItem Content="Title" />
-                <ComboBoxItem Content="Year" />
                 <ComboBoxItem Content="Rating" />
+                <ComboBoxItem Content="Year" />
                 <ComboBoxItem Content="Director" />
                 <ComboBoxItem Content="Tag" />
             </ComboBox>
@@ -67,6 +103,8 @@
                       Margin="20"
                       IsItemClickEnabled="True"
                       ItemClick="ListView_ItemClick"
+                      Name="MoviesListView"
+                      Visibility="Collapsed"
                       >
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="data:CollectedMovie">
@@ -133,6 +171,7 @@
                                                />
                                     <TextBlock Text="{x:Bind Director}"
                                                Foreground="White"
+                                               TextWrapping="Wrap"
                                                />
                                 </StackPanel>
                             </Grid>
@@ -145,9 +184,9 @@
         <ScrollViewer Grid.Column="1"
                       Grid.Row="1"
                       Margin="20"
-                      VerticalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Hidden"
                       HorizontalScrollBarVisibility="Auto"
-                      HorizontalAlignment="Right"
+                      HorizontalAlignment="Stretch"
                       >
             <Grid Name="MovieInformationGrid"
                   Visibility="Collapsed"
@@ -176,52 +215,53 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
+                    
 
                     <Image Name="PosterImage"
-                            Margin="10"
-                            Stretch="Uniform"
-                            Height="400"
+                           Margin="10"
+                           Stretch="Uniform"
+                           Height="400"
                            Grid.RowSpan="9"
-                            />
+                           />
 
                     <TextBlock Name="TitleTextBlock"
                                Grid.Column="1"
                                Grid.ColumnSpan="2"
                                Foreground="White"
-                               FontSize="26"
+                               FontSize="32"
                                FontWeight="Bold"
                                TextWrapping="Wrap"
                                Margin="5"
-                               MaxWidth="550"
+                               HorizontalAlignment="Left"
                                />
 
                     <TextBlock Text="Released:"
                                Grid.Column="1"
-                                Grid.Row="1"
-                                Style="{StaticResource MovieInfomationTextBlockStyle}"
-                                />
+                               Grid.Row="1"
+                               Style="{StaticResource MovieInfomationTitleTextBlockStyle}"
+                               />
                     <TextBlock Name="ReleasedTextBlock"
-                                Grid.Row="1"
-                                Grid.Column="2"
-                                Style="{StaticResource MovieInfomationTextBlockStyle}"
-                                />
-                           
+                               Grid.Row="1"
+                               Grid.Column="2"
+                               Style="{StaticResource MovieInfomationTextBlockStyle}"
+                               />
+
                     <TextBlock Text="Rating:"
                                Grid.Column="1"
-                                Grid.Row="2"
-                                Style="{StaticResource MovieInfomationTextBlockStyle}"
-                                />
+                               Grid.Row="2"
+                               Style="{StaticResource MovieInfomationTitleTextBlockStyle}"
+                               />
                     <TextBlock Name="RatingSumTextBlock"
                                 Grid.Column="2"
                                 Grid.Row="2"
                                 Style="{StaticResource MovieInfomationTextBlockStyle}"
                                 />
 
-                            
+
                     <TextBlock Text="Genre:"
                                Grid.Column="1"
                                 Grid.Row="3"
-                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                Style="{StaticResource MovieInfomationTitleTextBlockStyle}"
                                 />
                     <TextBlock Name="GenreTextBlock"
                                 Grid.Column="2"
@@ -229,11 +269,11 @@
                                 Style="{StaticResource MovieInfomationTextBlockStyle}"
                                 />
 
-                            
+
                     <TextBlock Text="Director:"
                                Grid.Column="1"
                                 Grid.Row="4"
-                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                Style="{StaticResource MovieInfomationTitleTextBlockStyle}"
                                 />
                     <TextBlock Name="DirectorTextBlock"
                                 Grid.Column="2"
@@ -244,7 +284,7 @@
                     <TextBlock Text="Writer:"
                                Grid.Column="1"
                                 Grid.Row="5"
-                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                Style="{StaticResource MovieInfomationTitleTextBlockStyle}"
                                 />
                     <TextBlock Name="WriterTextBlock"
                                 Grid.Column="2"
@@ -255,7 +295,7 @@
                     <TextBlock Text="Actors:"
                                Grid.Column="1"
                                 Grid.Row="6"
-                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                Style="{StaticResource MovieInfomationTitleTextBlockStyle}"
                                 />
                     <TextBlock Name="ActorsTextBlock"
                                 Grid.Column="2"
@@ -266,7 +306,7 @@
                     <TextBlock Text="IMDB Rating:"
                                Grid.Column="1"
                                 Grid.Row="7"
-                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                Style="{StaticResource MovieInfomationTitleTextBlockStyle}"
                                 />
                     <TextBlock Name="imdbRatingTextBlock"
                                 Grid.Column="2"
@@ -277,7 +317,7 @@
                     <TextBlock Text="Collection Date:"
                                Grid.Column="1"
                                 Grid.Row="8"
-                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                Style="{StaticResource MovieInfomationTitleTextBlockStyle}"
                                 />
                     <TextBlock Name="CollectionDateTextBlock"
                                 Grid.Column="2"
@@ -293,16 +333,17 @@
                            FontSize="20"
                            Margin="20,5"
                            Grid.Row="1"
+                           FontWeight="Bold"
                            />
 
                 <TextBlock Name="FilmCriticTextBlock"
                            HorizontalAlignment="Left"
                            TextWrapping="Wrap"
                            Foreground="White"
-                           MaxWidth="700"
                            FontSize="20"
                            Margin="20,5"
                            Grid.Row="2"
+                           MaxWidth="800"
                            />
 
                 <RelativePanel Grid.Row="3"
@@ -376,6 +417,5 @@
                 </RelativePanel>
             </Grid>
         </ScrollViewer>
-        
     </Grid>
 </Page>

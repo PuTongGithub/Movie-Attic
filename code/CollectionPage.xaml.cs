@@ -45,6 +45,16 @@ namespace MovieCollection
                 showMovieList.Add(item);
             }
 
+            if (showMovieList.Count() == 0)
+            {
+                NoCollectionHit.Visibility = Visibility.Visible;
+                GoSearchHit.Visibility = Visibility.Visible; 
+            }
+            else
+            {
+                ComboBoxesGrid.Visibility = Visibility.Visible;
+                MoviesListView.Visibility = Visibility.Visible;
+            }
         }
 
         private void ClassComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -63,17 +73,6 @@ namespace MovieCollection
                     }
                     break;
 
-                case "Year":
-                    SortItems.Clear();
-                    showMovieList.Clear();
-                    SortItemComboBox.Visibility = Visibility.Collapsed;
-                    mainMovieList = SQLiteOperation.QueryDataByType(SQLiteOperation.OrderType.Year);
-                    foreach (var item in mainMovieList)
-                    {
-                        showMovieList.Add(item);
-                    }
-                    break;
-
                 case "Rating":
                     SortItems.Clear();
                     showMovieList.Clear();
@@ -86,6 +85,24 @@ namespace MovieCollection
                     }
                     break;
 
+                case "Year":
+                    SortItems.Clear();
+                    showMovieList.Clear();
+                    SortItemComboBox.Visibility = Visibility.Visible;
+                    mainMovieList = SQLiteOperation.QueryDataByType(SQLiteOperation.OrderType.Year);
+                    foreach (var item in mainMovieList)
+                    {
+                        showMovieList.Add(item);
+                    }
+
+                    var years = mainMovieList.GroupBy(v => v.Year).Select(g => g.First()).ToList();
+                    years.OrderBy(v => v.Year);
+                    foreach(var item in years)
+                    {
+                        SortItems.Add(item.Year);
+                    }
+                    break;
+
                 case "Director":
                     SortItems.Clear();
                     showMovieList.Clear();
@@ -95,6 +112,7 @@ namespace MovieCollection
                     {
                         showMovieList.Add(item);
                     }
+
                     var directors = mainMovieList.GroupBy(v => v.Director).Select(g => g.First()).ToList();
                     directors.OrderBy(v => v.Director);
                     foreach(var item in directors)
@@ -129,6 +147,10 @@ namespace MovieCollection
             var item = (string)SortItemComboBox.SelectedItem;
             List<CollectedMovie> movieList = new List<CollectedMovie>();
 
+            if (itemClass.Content.ToString() == "Year")
+            {
+                movieList = mainMovieList.Where(v => v.Year == item).ToList();
+            }
             if (itemClass.Content.ToString() == "Director")
             {
                 movieList = mainMovieList.Where(v => v.Director == item).ToList();                
@@ -146,8 +168,7 @@ namespace MovieCollection
         }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            MovieInformationGrid.Visibility = Visibility.Visible;
+        {            
             movie = (CollectedMovie)e.ClickedItem;
             PosterImage.Source= new BitmapImage(new Uri(movie.Poster, UriKind.Absolute));
 
@@ -161,6 +182,8 @@ namespace MovieCollection
             imdbRatingTextBlock.Text = movie.imdbRating;
             CollectionDateTextBlock.Text = movie.CollectionDate;
             FilmCriticTextBlock.Text = movie.FilmCritic;
+
+            MovieInformationGrid.Visibility = Visibility.Visible;
         }
 
         private void MoreInformationButton_Click(object sender, RoutedEventArgs e)
@@ -181,5 +204,6 @@ namespace MovieCollection
         {
             DeleteButtonFlyout.Hide();
         }
+        
     }
 }

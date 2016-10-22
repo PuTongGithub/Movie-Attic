@@ -42,6 +42,9 @@ namespace MovieCollection
         {
             try
             {
+                LodingRing.IsActive = true;
+                LodingRing.Visibility = Visibility.Visible;
+
                 movie = await GetMovie.GetData(imdbID);
                 BackgroundImage.Source = new BitmapImage(new Uri(movie.Poster, UriKind.Absolute));
                 PosterImage.Source = new BitmapImage(new Uri(movie.Poster, UriKind.Absolute));
@@ -68,7 +71,8 @@ namespace MovieCollection
             }
             finally
             {
-
+                LodingRing.IsActive = false;
+                LodingRing.Visibility = Visibility.Collapsed;
             }
         }
 
