@@ -19,10 +19,6 @@
                         <AdaptiveTrigger MinWindowWidth="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="TitleBlock.FontSize" Value="20" />
-                        <Setter Target="ContantTitleBlock.FontSize" Value="16" />
-                        <Setter Target="ContantBlock.FontSize" Value="16" />
-                        <Setter Target="SearchPageTextPanel.Margin" Value="5" />
                     </VisualState.Setters>
                 </VisualState>
 
@@ -31,10 +27,6 @@
                         <AdaptiveTrigger MinWindowWidth="900" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="TitleBlock.FontSize" Value="30" />
-                        <Setter Target="ContantTitleBlock.FontSize" Value="26" />
-                        <Setter Target="ContantBlock.FontSize" Value="26" />
-                        <Setter Target="SearchPageTextPanel.Margin" Value="20" />
                     </VisualState.Setters>
                 </VisualState>
 
@@ -49,6 +41,7 @@
         <Image Source="{x:Bind Search.Poster}"
                Stretch="Uniform"
                Name="PosterImage"
+               Margin="10"
                />
 
         <StackPanel Grid.Column="1"
@@ -59,18 +52,18 @@
                        FontWeight="Bold"
                        TextWrapping="Wrap"
                        Name="TitleBlock"
-                       FontSize="30"
+                       FontSize="26"
                        Foreground="White"
                        />
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Year:"
-                           Name="ContentTitleBlock"
-                           FontSize="26"
+                           Name="ContantTitleBlock"
+                           FontSize="20"
                            Foreground="White"
                            />
                 <TextBlock Text="{x:Bind Search.Year}"
-                           Name="ContentBlock"
-                           FontSize="26"
+                           Name="ContantBlock"
+                           FontSize="20"
                            Foreground="White"
                            />
             </StackPanel>            

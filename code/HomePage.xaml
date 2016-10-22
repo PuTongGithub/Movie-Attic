@@ -11,7 +11,7 @@
     <Page.Resources>
 
         <Style TargetType="TextBlock" x:Key="MovieTitleTextBlockStyle">
-            <Setter Property="FontSize" Value="30" />
+            <Setter Property="FontSize" Value="36" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="Margin" Value="0,10" />
@@ -24,6 +24,7 @@
             <Setter Property="Margin" Value="5,5" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="FontWeight" Value="Bold" />
         </Style>
 
         <Style TargetType="TextBlock" x:Key="ContentTextBlockStyle">
@@ -56,9 +57,8 @@
                       Visibility="Collapsed"
                       IsActive="False"
                       Grid.Row="1"
-                      FontSize="50"
-                      Height="30"
-                      Width="30"
+                      Height="50"
+                      Width="50"
                       Opacity="0.5"
                       />
 
