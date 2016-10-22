@@ -15,7 +15,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using MovieCollection.data;
 using Windows.UI;
-using Windows.System;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -91,12 +90,12 @@ namespace MovieCollection
             AboutSplitView.IsPaneOpen = !AboutSplitView.IsPaneOpen;
         }
 
-        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             try
             {
                 Uri targetUri = new Uri("ms-windows-store://review/?ProductId=9nblggh42jk9");
-                await Launcher.LaunchUriAsync(targetUri);
+                MyWebView.Navigate(targetUri);
             }
             catch { }            
         }

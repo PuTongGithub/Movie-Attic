@@ -8,7 +8,6 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -220,16 +219,6 @@ namespace MovieCollection
         private void TagsSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
             TagsSuggestBox.Text = (string)args.SelectedItem;
-        }
-
-        private async void ImdbPageButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Uri targetUri = new Uri("http://www.imdb.com/title/"+movie.imdbID);
-                await Launcher.LaunchUriAsync(targetUri);
-            }
-            catch { }
         }
     }
 }

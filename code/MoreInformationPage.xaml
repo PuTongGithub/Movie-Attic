@@ -24,7 +24,6 @@
             <Setter Property="Margin" Value="10,5" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="FontWeight" Value="Bold" />
         </Style>
 
         <Style TargetType="TextBlock" x:Key="ContentTextBlockStyle">
@@ -258,7 +257,7 @@
                 </ScrollViewer>
             </SplitView.Pane>
         </SplitView>
-
+        
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <Grid>
                 <Grid.RowDefinitions>
@@ -472,6 +471,7 @@
                             Margin="40,10"
                             BorderBrush="White"
                             Click="EditButton_Click"
+                            Visibility="Visible"
                             RelativePanel.AlignRightWithPanel="True"
                             >
                         <StackPanel Orientation="Horizontal"
@@ -491,42 +491,17 @@
                                        />
                         </StackPanel>
                     </Button>
-
-                    <Button Name="ImdbPageButton"
-                            Background="Transparent"
-                            Margin="40,10"
-                            BorderBrush="White"
-                            Click="ImdbPageButton_Click"
-                            RelativePanel.LeftOf="EditButton"
-                            >
-                        <StackPanel Orientation="Horizontal"
-                                    Background="Transparent"
-                                    >
-                            <TextBlock FontFamily="Segoe MDL2 Assets"
-                                       Text="&#xEC27;"
-                                       FontSize="16"
-                                       Foreground="White"
-                                       VerticalAlignment="Center"
-                                       />
-                            <TextBlock FontSize="16"
-                                       Text="IMDb Page"
-                                       Foreground="White"
-                                       Margin="10,0,0,0"
-                                       VerticalAlignment="Center"
-                                       />
-                        </StackPanel>
-                    </Button>
                 </RelativePanel>
 
                 <TextBlock Name="TagsTextBlock"
-                           Style="{StaticResource ContentTitleTextBlockStyle}"
+                           Style="{StaticResource ContentTextBlockStyle}"
                            Margin="50,10"
                            Grid.Row="2"
                            Grid.ColumnSpan="2"
                            />
 
                 <TextBlock Text="Flim Critic:"
-                           Style="{StaticResource ContentTitleTextBlockStyle}"
+                           Style="{StaticResource ContentTextBlockStyle}"
                            Margin="50,10"
                            Grid.Row="3"
                            Grid.ColumnSpan="2"

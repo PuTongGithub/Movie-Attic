@@ -24,7 +24,6 @@
             <Setter Property="Margin" Value="5,5" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="FontWeight" Value="Bold" />
         </Style>
 
         <Style TargetType="TextBlock" x:Key="ContentTextBlockStyle">
@@ -92,6 +91,10 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -103,18 +106,33 @@
                Opacity="0.1"
                VerticalAlignment="Center"
                Grid.RowSpan="2"
+               Grid.ColumnSpan="2"
                />
 
-        <ProgressRing Name="LodingRing"
-                      Visibility="Collapsed"
-                      IsActive="False"
-                      Height="50"
-                      Width="50"
-                      Opacity="0.5"
-                      />
-
+        <RelativePanel VerticalAlignment="Center"
+                       Margin="30"
+                       >
+            <Image Name="PosterImage"
+                   Stretch="Uniform"
+                   Margin="20,0"
+                   MaxHeight="900"
+                   RelativePanel.AlignHorizontalCenterWithPanel="True"
+                   />
+            <Button FontFamily="Segoe MDL2 Assets"
+                    Content="&#xE00E;"
+                    FontSize="30"
+                    Foreground="White"
+                    Background="Transparent"
+                    Click="Button_Click"
+                    RelativePanel.AlignLeftWith="PosterImage"
+                    RelativePanel.Below="PosterImage"
+                    BorderThickness="0"
+                    Margin="25,25,0,0"
+                    />
+        </RelativePanel>
 
         <SplitView Name="AddCollectionSplitView"
+                   Grid.Column="1"
                    Grid.RowSpan="2"
                    HorizontalAlignment="Right"
                    DisplayMode="Overlay"
@@ -178,7 +196,7 @@
                                             </Style>
                                         </Flyout.FlyoutPresenterStyle>
                                         <Grid Background="#FF101010">
-
+                                            
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto" />
                                                 <RowDefinition Height="Auto" />
@@ -189,7 +207,7 @@
                                                 <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
-
+                                            
                                             <TextBlock Text="Picture:"
                                                        Style="{StaticResource CollectionPaneTextBlock}"
                                                        />
@@ -232,7 +250,7 @@
                                     </Flyout>
                                 </Button.Flyout>
                             </Button>
-
+                            
                         </Grid>
 
                         <TextBlock Text="Tags:"
@@ -300,209 +318,174 @@
                                     />
                         </Grid>
                     </StackPanel>
-                </ScrollViewer>
+                </ScrollViewer>                
             </SplitView.Pane>
         </SplitView>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="3*" />
-                </Grid.ColumnDefinitions>
-                <Grid VerticalAlignment="Center"
-                      Margin="30"
-                      >     
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <Image Name="PosterImage"
-                           Stretch="Uniform"
-                           Margin="20,0"
-                           MaxHeight="900"
-                           RelativePanel.AlignHorizontalCenterWithPanel="True"
-                           />
-                    <Button FontFamily="Segoe MDL2 Assets"
-                            Content="&#xE00E;"
-                            FontSize="30"
-                            Foreground="White"
-                            Background="Transparent"
-                            Click="Button_Click"
-                            RelativePanel.AlignLeftWith="PosterImage"
-                            RelativePanel.Below="PosterImage"
-                            BorderThickness="0"
-                            Margin="25,15"
-                            Grid.Row="1"
-                            />
-                </Grid>
-
-
-
-                <Grid Name="MovieInfomationGrid"                      
-                      VerticalAlignment="Center"
-                      Margin="0,0,20,0"
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
                       Grid.Column="1"
                       >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+            <Grid Name="MovieInfomationGrid"                      
+                  VerticalAlignment="Center"
+                  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                    <TextBlock Name="TitleTextBlock"
+                <TextBlock Name="TitleTextBlock"
                                        Style="{StaticResource MovieTitleTextBlockStyle}"
                                        Grid.ColumnSpan="2"
                                        />
 
-                    <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                        Grid.Row="1"
                                        Text="Released:"
                                        />
-                    <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                        Grid.Row="1"
                                        Grid.Column="1"    
                                        Name="ReleasedTextBlock"
                                        />
 
-                    <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                        Grid.Row="2"
                                        Text="Rated:"
                                        />
-                    <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                        Grid.Row="2"
                                        Grid.Column="1"    
                                        Name="RatedTextBlock"
                                        />
 
-                    <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                        Grid.Row="3"
                                        Text="Runtime:"
                                        />
-                    <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                        Grid.Row="3"
                                        Grid.Column="1"    
                                        Name="RuntimeTextBlock"
                                        />
 
-                    <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                        Grid.Row="4"
                                        Text="Genre:"
                                        />
-                    <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                        Grid.Row="4"
                                        Grid.Column="1"    
                                        Name="GenreTextBlock"
                                        />
 
-                    <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                        Grid.Row="5"    
                                        Text="Director:"
                                        />
-                    <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                        Grid.Row="5"
                                        Grid.Column="1"
                                        Name="DirectorTextBlock"
                                        />
 
-                    <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                        Grid.Row="6"
                                        Text="Writer:"
                                        />
-                    <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                        Grid.Row="6"
                                        Grid.Column="1"
                                        Name="WriterTextBlock"
                                        />
 
-                    <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                        Grid.Row="7"
                                        Text="Actors:"
                                        />
-                    <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                        Grid.Row="7"
                                        Grid.Column="1"
                                        Name="ActorsTextBlock"
                                        />
 
-                    <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                        Grid.Row="8"                         
                                        Text="Country:"
                                        />
-                    <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                        Grid.Row="8"
                                        Grid.Column="1"
                                        Name="CountryTextBlock"
                                        />
 
-                    <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                        Grid.Row="9"                         
                                        Text="Language:"
                                        />
-                    <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                        Grid.Row="9"
                                        Grid.Column="1"
                                        Name="LanguageTextBlock"
                                        />
 
-                    <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                        Grid.Row="10"                         
                                        Text="imdbRating:"
                                        />
-                    <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                        Grid.Row="10"
                                        Grid.Column="1"
                                        Name="imdbRatingTextBlock"
                                        />
 
-                    <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                        Grid.Row="11"                         
                                        Text="imdbVotes:"
                                        />
-                    <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                        Grid.Row="11"
                                        Grid.Column="1"
                                        Name="imdbVotesTextBlock"
                                        />
 
-                    <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                        Grid.Row="12"
                                        Text="Awards:"
                                        />
-                    <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                        Grid.Row="12"
                                        Grid.Column="1"
                                        Name="AwardsTextBlock"
                                        />
 
-                    <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                        Grid.Row="13"
                                        Text="Plot:"
                                        />
-                    <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                        Grid.Row="13"
                                        Grid.Column="1"
                                        Name="PlotTextBlock"
                                        />
 
-                    <Button Name="CollectButton"
+                <Button Name="CollectButton"
                     Background="Transparent"
                     Margin="30"
                     Grid.Row="14"
@@ -512,25 +495,25 @@
                     Click="CollectButton_Click"
                     Visibility="Visible"
                     >
-                        <StackPanel Orientation="Horizontal"
+                    <StackPanel Orientation="Horizontal"
                             Background="Transparent"
                             >
-                            <TextBlock FontFamily="Segoe MDL2 Assets"
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
                                Text="&#xE109;"
                                FontSize="20"
                                Foreground="White"
                                VerticalAlignment="Center"
                                />
-                            <TextBlock FontSize="24"
+                        <TextBlock FontSize="24"
                                Text="Collect"
                                Foreground="White"
                                Margin="10,0,0,0"
                                VerticalAlignment="Center"
                                />
-                        </StackPanel>
-                    </Button>
+                    </StackPanel>
+                </Button>
 
-                    <Button Name="CollectedButton"
+                <Button Name="CollectedButton"
                     Background="Transparent"
                     Margin="30"
                     Grid.Row="14"
@@ -539,26 +522,27 @@
                     BorderBrush="Gray"
                     Visibility="Collapsed"
                     >
-                        <StackPanel Orientation="Horizontal"
+                    <StackPanel Orientation="Horizontal"
                             Background="Transparent"
                             >
-                            <TextBlock FontFamily="Segoe MDL2 Assets"
+                        <TextBlock FontFamily="Segoe MDL2 Assets"
                                Text="&#xE0E7;"
                                FontSize="20"
                                Foreground="Gray"
                                VerticalAlignment="Center"
                                />
-                            <TextBlock FontSize="24"
+                        <TextBlock FontSize="24"
                                Text="Collected"
                                Foreground="Gray"
                                Margin="10,0,0,0"
                                VerticalAlignment="Center"
                                />
-                        </StackPanel>
-                    </Button>
-                </Grid>
-                
+                    </StackPanel>
+                </Button>
             </Grid>
         </ScrollViewer>
+
+        
+        
     </Grid>
 </Page>
