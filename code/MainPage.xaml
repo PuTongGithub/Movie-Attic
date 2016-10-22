@@ -1,0 +1,266 @@
+﻿<Page
+    x:Class="MovieCollection.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MovieCollection"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        
+        <Style TargetType="TextBlock" x:Key="HamburgerIconStyle">
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,5" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        
+        <Style TargetType="TextBlock" x:Key="HamburgerTitleStyle">
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="Margin" Value="20,5,0,5" />
+            <Setter Property="Foreground" Value="White" />            
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="AboutTextBlockStyle">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="10,20" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+
+                <VisualState x:Name="VisualStatePhone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainSplitView.CompactPaneLength" Value="0" />
+                        <Setter Target="MainSplitView.DisplayMode" Value="Overlay" />
+                        <Setter Target="HamburgerTitleStyle.FontSize" Value="15" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="VisualStateTablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainSplitView.CompactPaneLength" Value="50" />
+                        <Setter Target="MainSplitView.DisplayMode" Value="CompactOverlay" />
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <WebView Name="MyWebView" />
+
+        <Button Name="HamburgerButton"
+                    FontFamily="Segoe MDL2 Assets"
+                    Content="&#xE700;"
+                    Click="Button_Click"
+                    FontSize="30"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Canvas.ZIndex="100"
+                    Background="Transparent"
+                    Foreground="White"
+                    />
+
+
+        <SplitView Name="MainSplitView"
+                   CompactPaneLength="50"
+                   OpenPaneLength="200"
+                   Background="Transparent"
+                   PaneBackground="#FF101010"
+                   >
+            <SplitView.Pane>
+                <Grid Margin="0,42,0,0">
+                    <ListBox Name="HumburgerMainList"       
+                             SelectionChanged="HumburgerMainList_SelectionChanged"
+                             Background="Transparent"
+                             >
+                        <ListBoxItem Name="HomeItem"
+                                     PointerEntered="ListBoxItem_PointerEntered"
+                                     PointerExited="ListBoxItem_PointerExited"
+                                     >
+                            <StackPanel Orientation="Horizontal"
+                                        Background="Transparent"
+                                        >
+                                <TextBlock Style="{StaticResource HamburgerIconStyle}"
+                                           Text="&#xE10F;"
+                                           />
+                                <TextBlock Style="{StaticResource HamburgerTitleStyle}"
+                                           Text="Home"
+                                           />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="SearchItem"
+                                     PointerEntered="ListBoxItem_PointerEntered"
+                                     PointerExited="ListBoxItem_PointerExited"
+                                     >
+                            <StackPanel Orientation="Horizontal"
+                                            Background="Transparent"
+                                            >
+                                <TextBlock Style="{StaticResource HamburgerIconStyle}"
+                                               Text="&#xE1A3;"
+                                               />
+                                <TextBlock Style="{StaticResource HamburgerTitleStyle}"
+                                               Text="Search"
+                                               />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="CollectionItem"
+                                     PointerEntered="ListBoxItem_PointerEntered"
+                                     PointerExited="ListBoxItem_PointerExited"
+                                     >
+                            <StackPanel Orientation="Horizontal"
+                                            Background="Transparent"
+                                            >
+                                <TextBlock Style="{StaticResource HamburgerIconStyle}"
+                                               Text="&#xEB51;"
+                                               />
+                                <TextBlock Style="{StaticResource HamburgerTitleStyle}"
+                                               Text="Collection"
+                                               />
+                            </StackPanel>
+                        </ListBoxItem>
+                    </ListBox>
+
+                    <Button VerticalAlignment="Bottom"
+                            Background="Transparent"
+                            Click="Button_Click_1"
+                            >
+                        <StackPanel Orientation="Horizontal"
+                                    Background="Transparent"
+                                    >
+                            <TextBlock Style="{StaticResource HamburgerIconStyle}"
+                                       Text="&#xE13D;"
+                                       />
+                            <TextBlock Style="{StaticResource HamburgerTitleStyle}"
+                                       Text="About"
+                                       />
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid Background="Black">
+                    <Button Name="TitleText"
+                            Background="Transparent"
+                            Height="42"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Top"
+                            Canvas.ZIndex="100"
+                            />
+                    <Image Source="Assets/Lots-of-movies.jpg"
+                           Stretch="UniformToFill"
+                           Opacity="0.1"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           />
+                    <Frame Name="MainPageFrame" />
+                </Grid>                
+            </SplitView.Content>
+        </SplitView>
+
+        <SplitView Name="AboutSplitView"
+                   HorizontalAlignment="Right"
+                   FlowDirection="RightToLeft"
+                   Canvas.ZIndex="500"
+                   PaneBackground="#FF101010"
+                   OpenPaneLength="370"
+                   >
+            <SplitView.Pane>
+                <Grid FlowDirection="LeftToRight"
+                      HorizontalAlignment="Center"
+                      Margin="0,50,0,0"
+                      >
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <Image Source="Assets/StoreLogo.scale-200.png" />
+                        <StackPanel VerticalAlignment="Center" Margin="5,0">
+                            <TextBlock Style="{StaticResource AboutTextBlockStyle}"
+                                       Text="Movie Attic"
+                                       Margin="5"
+                                       />
+                            <TextBlock Style="{StaticResource AboutTextBlockStyle}"
+                                       Text="VerSion:1.0.0"
+                                       Margin="5"
+                                       />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <TextBlock Grid.Row="1"
+                               Text="If you like this app:"
+                               Style="{StaticResource AboutTextBlockStyle}"
+                               />
+                    <Button Grid.Row="2"
+                            Content="Rate for this app"
+                            Foreground="White"
+                            FontSize="22"
+                            HorizontalAlignment="Center"
+                            Margin="10"
+                            BorderBrush="White"
+                            Click="Button_Click_2"
+                            />
+
+                    <TextBlock Grid.Row="3"
+                               Text="Developer:Pu Tong"
+                               Style="{StaticResource AboutTextBlockStyle}"
+                               />
+                    <TextBlock Grid.Row="4"
+                               Text="E-mail:282549045@qq.com"
+                               Style="{StaticResource AboutTextBlockStyle}"
+                               />
+
+                    <TextBlock Grid.Row="5"
+                               Text="Special thanks to:"
+                               Style="{StaticResource AboutTextBlockStyle}"
+                               Margin="0,20,0,0"
+                               />
+                    <StackPanel Grid.Row="6"
+                                Orientation="Horizontal"
+                                Margin="20,0"
+                                >
+                        <HyperlinkButton Content="OMDb"
+                                         NavigateUri="http://omdbapi.com/"
+                                         FontSize="20"
+                                         />
+                        <TextBlock Text="--for providing movies data"
+                                   Style="{StaticResource AboutTextBlockStyle}"
+                                   Margin="0"
+                                   VerticalAlignment="Center"
+                                   />
+                    </StackPanel>
+                    <TextBlock Grid.Row="7"
+                               Text="Li Zhe--for providing logo icon"
+                               Style="{StaticResource AboutTextBlockStyle}"
+                               Margin="0"
+                               />
+
+                </Grid>
+            </SplitView.Pane>
+        </SplitView>
+    </Grid>
+</Page>

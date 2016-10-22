@@ -1,0 +1,381 @@
+﻿<Page
+    x:Class="MovieCollection.CollectionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MovieCollection"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:MovieCollection.data"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="MovieInfomationTextBlockStyle">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="5,3,5,3" />
+            <Setter Property="MaxWidth" Value="350" />
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="Transparent" Margin="0,50,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="400"/>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Name="SortClassComboBox"
+                      SelectionChanged="ClassComboBox_SelectionChanged"
+                      HorizontalAlignment="Right"
+                      Margin="20"
+                      MinWidth="300"
+                      >
+                <ComboBoxItem Content="Sort by..." IsSelected="True" />
+                <ComboBoxItem Content="Title" />
+                <ComboBoxItem Content="Year" />
+                <ComboBoxItem Content="Rating" />
+                <ComboBoxItem Content="Director" />
+                <ComboBoxItem Content="Tag" />
+            </ComboBox>
+
+            <ComboBox Name="SortItemComboBox"
+                      Visibility="Collapsed"
+                      HorizontalAlignment="Left"
+                      Margin="20"
+                      ItemsSource="{x:Bind SortItems}"
+                      Grid.Column="1"
+                      MinWidth="300"
+                      SelectionChanged="SortItemComboBox_SelectionChanged"
+                      >
+            </ComboBox>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Hidden"
+                      >
+            <ListView ItemsSource="{x:Bind showMovieList}"
+                      Margin="20"
+                      IsItemClickEnabled="True"
+                      ItemClick="ListView_ItemClick"
+                      >
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="data:CollectedMovie">
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="{x:Bind Poster}"
+                                   Stretch="Uniform"
+                                   Margin="5"
+                                   Height="150"
+                                   />
+
+                            <Grid Grid.Column="1"
+                                  VerticalAlignment="Center"
+                                  >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="{x:Bind Title}"
+                                           FontSize="20"
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           TextWrapping="Wrap"
+                                           Margin="5,3"
+                                           />
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="1"
+                                            Margin="5,3"
+                                            >
+                                    <TextBlock Text="Year:"
+                                               Foreground="White"
+                                               />
+                                    <TextBlock Text="{x:Bind Year}"
+                                               Foreground="White"
+                                               />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="2"
+                                            Margin="5,3"
+                                            >
+                                    <TextBlock Text="Rating:"
+                                               Foreground="White"
+                                               />
+                                    <TextBlock Text="{x:Bind RatingSum}"
+                                               Foreground="White"
+                                               />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="3"
+                                            Margin="5,3"
+                                            >
+                                    <TextBlock Text="Director:"
+                                               Foreground="White"
+                                               />
+                                    <TextBlock Text="{x:Bind Director}"
+                                               Foreground="White"
+                                               />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+
+        <ScrollViewer Grid.Column="1"
+                      Grid.Row="1"
+                      Margin="20"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Auto"
+                      HorizontalAlignment="Right"
+                      >
+            <Grid Name="MovieInformationGrid"
+                  Visibility="Collapsed"
+                  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Name="PosterImage"
+                            Margin="10"
+                            Stretch="Uniform"
+                            Height="400"
+                           Grid.RowSpan="9"
+                            />
+
+                    <TextBlock Name="TitleTextBlock"
+                               Grid.Column="1"
+                               Grid.ColumnSpan="2"
+                               Foreground="White"
+                               FontSize="26"
+                               FontWeight="Bold"
+                               TextWrapping="Wrap"
+                               Margin="5"
+                               MaxWidth="550"
+                               />
+
+                    <TextBlock Text="Released:"
+                               Grid.Column="1"
+                                Grid.Row="1"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+                    <TextBlock Name="ReleasedTextBlock"
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+                           
+                    <TextBlock Text="Rating:"
+                               Grid.Column="1"
+                                Grid.Row="2"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+                    <TextBlock Name="RatingSumTextBlock"
+                                Grid.Column="2"
+                                Grid.Row="2"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+
+                            
+                    <TextBlock Text="Genre:"
+                               Grid.Column="1"
+                                Grid.Row="3"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+                    <TextBlock Name="GenreTextBlock"
+                                Grid.Column="2"
+                                Grid.Row="3"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+
+                            
+                    <TextBlock Text="Director:"
+                               Grid.Column="1"
+                                Grid.Row="4"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+                    <TextBlock Name="DirectorTextBlock"
+                                Grid.Column="2"
+                                Grid.Row="4"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+
+                    <TextBlock Text="Writer:"
+                               Grid.Column="1"
+                                Grid.Row="5"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+                    <TextBlock Name="WriterTextBlock"
+                                Grid.Column="2"
+                                Grid.Row="5"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+
+                    <TextBlock Text="Actors:"
+                               Grid.Column="1"
+                                Grid.Row="6"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+                    <TextBlock Name="ActorsTextBlock"
+                                Grid.Column="2"
+                                Grid.Row="6"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+
+                    <TextBlock Text="IMDB Rating:"
+                               Grid.Column="1"
+                                Grid.Row="7"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+                    <TextBlock Name="imdbRatingTextBlock"
+                                Grid.Column="2"
+                                Grid.Row="7"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+
+                    <TextBlock Text="Collection Date:"
+                               Grid.Column="1"
+                                Grid.Row="8"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+                    <TextBlock Name="CollectionDateTextBlock"
+                                Grid.Column="2"
+                                Grid.Row="8"
+                                Style="{StaticResource MovieInfomationTextBlockStyle}"
+                                />
+
+                </Grid>
+
+                <TextBlock Text="Film Critic:"
+                           HorizontalAlignment="Left"
+                           Foreground="White"
+                           FontSize="20"
+                           Margin="20,5"
+                           Grid.Row="1"
+                           />
+
+                <TextBlock Name="FilmCriticTextBlock"
+                           HorizontalAlignment="Left"
+                           TextWrapping="Wrap"
+                           Foreground="White"
+                           MaxWidth="700"
+                           FontSize="20"
+                           Margin="20,5"
+                           Grid.Row="2"
+                           />
+
+                <RelativePanel Grid.Row="3"
+                               Margin="40"
+                               >
+                    <Button Name="MoreInformationButton"
+                            BorderBrush="White"
+                            Content="More Information"
+                            FontSize="20"
+                            Foreground="White"
+                            RelativePanel.AlignRightWithPanel="True"
+                            Margin="20,0"
+                            Click="MoreInformationButton_Click"
+                            />
+
+                    <Button Name="DeleteButton"
+                            BorderBrush="White"
+                            Content="Delete"
+                            FontSize="20"
+                            Foreground="White"
+                            RelativePanel.LeftOf="MoreInformationButton"
+                            Margin="20,0"
+                            >
+                        <Button.Flyout>
+                            <Flyout x:Name="DeleteButtonFlyout">
+                                <Flyout.FlyoutPresenterStyle>
+                                    <Style TargetType="FlyoutPresenter">
+                                        <Setter Property="Background" Value="#FF101010" />
+                                        <Setter Property="BorderBrush" Value="Black" />
+                                    </Style>
+                                </Flyout.FlyoutPresenterStyle>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="This movie will be DELETED!"
+                                               Grid.ColumnSpan="2"
+                                               Foreground="White"
+                                               Margin="10"
+                                               />
+
+                                    <Button Name="DeleteYes"
+                                            Content="Yes"
+                                            Grid.Row="1"
+                                            Margin="5"
+                                            BorderBrush="White"
+                                            Foreground="White"
+                                            HorizontalAlignment="Stretch"
+                                            Click="DeleteYes_Click"
+                                            />
+                                    <Button Name="DeleteNo"
+                                            Content="No"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Margin="5"
+                                            BorderBrush="White"
+                                            Foreground="White"
+                                            HorizontalAlignment="Stretch"
+                                            Click="DeleteNo_Click"
+                                            />
+                                </Grid>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </RelativePanel>
+            </Grid>
+        </ScrollViewer>
+        
+    </Grid>
+</Page>
