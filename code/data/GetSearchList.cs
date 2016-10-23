@@ -12,7 +12,8 @@ namespace MovieCollection.data
 {
     public class GetSearchList
     {
-        private static string ImageBaseUri = "https://image.tmdb.org/t/p/original";
+        private static string PosterImageBaseUri = "https://image.tmdb.org/t/p/original";
+        private static string BackdropImageBaseUri = "https://image.tmdb.org/t/p/original";
 
         public async static Task GetData(ObservableCollection<Search> SearchList, string SearchString, int page = 0)
         {
@@ -30,10 +31,10 @@ namespace MovieCollection.data
 
                 foreach (var item in Result.results)
                 {
-                    item.poster_path = ImageBaseUri + item.poster_path;
+                    item.poster_path = PosterImageBaseUri + item.poster_path;
                     if (item.backdrop_path != null)
                     {
-                        item.backdrop_path = ImageBaseUri + item.backdrop_path;
+                        item.backdrop_path = BackdropImageBaseUri + item.backdrop_path;
                     }
                     else
                     {

@@ -38,6 +38,8 @@ namespace MovieCollection.data
         public bool video { get; set; }
         [DataMember]
         public double vote_average { get; set; }
+
+        public string imdbID { get; set; }
     }
 
     [DataContract]

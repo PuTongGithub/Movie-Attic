@@ -66,7 +66,7 @@ namespace MovieCollection.data
         [DataMember]
         public BelongsToCollection belongs_to_collection { get; set; }
         [DataMember]
-        public int budget { get; set; }
+        public string budget { get; set; }
         [DataMember]
         public List<Genre> genres { get; set; }
         [DataMember]
@@ -92,9 +92,9 @@ namespace MovieCollection.data
         [DataMember]
         public string release_date { get; set; }
         [DataMember]
-        public int revenue { get; set; }
+        public string revenue { get; set; }
         [DataMember]
-        public int runtime { get; set; }
+        public string runtime { get; set; }
         [DataMember]
         public List<SpokenLanguage> spoken_languages { get; set; }
         [DataMember]
@@ -106,9 +106,9 @@ namespace MovieCollection.data
         [DataMember]
         public bool video { get; set; }
         [DataMember]
-        public int vote_average { get; set; }
+        public string vote_average { get; set; }
         [DataMember]
-        public int vote_count { get; set; }
+        public string vote_count { get; set; }
     }
 }
 
