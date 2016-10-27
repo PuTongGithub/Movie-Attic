@@ -78,8 +78,7 @@ namespace MovieCollection
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var search = (Search)e.Parameter;
-            imdbID = search.imdbID;
+            imdbID = (string)e.Parameter;
             getData();
 
             var test = SQLiteOperation.QueryData(imdbID);
