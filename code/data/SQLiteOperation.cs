@@ -28,7 +28,7 @@ namespace MovieCollection.data
             string DbPath = Path.Combine(ApplicationData.Current.LocalFolder.Path, DB_NAME);
             // 连接数据库，如果数据库文件不存在则创建一个空数据库。
             conn = new SQLiteConnection(new SQLitePlatformWinRT(), DbPath);
-            // 创建 CollectedMovie 模型对应的表，如果已存在，则忽略该操作。
+            // 创建 Person 模型对应的表，如果已存在，则忽略该操作。
             conn.CreateTable<CollectedMovie>();
         }
 

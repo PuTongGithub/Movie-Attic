@@ -12,9 +12,6 @@ namespace MovieCollection.data
 {
     public class GetSearchList
     {
-        private static string PosterImageBaseUri = "https://image.tmdb.org/t/p/original";
-        private static string BackdropImageBaseUri = "https://image.tmdb.org/t/p/original";
-
         public async static Task GetData(ObservableCollection<Search> SearchList, string SearchString, int page = 0)
         {
             try
@@ -29,18 +26,14 @@ namespace MovieCollection.data
                     Result = await GetSearchResultAsync(SearchString, page);
                 }
 
-                foreach (var item in Result.results)
+                if (Result.Response == "True")
                 {
-                    item.poster_path = PosterImageBaseUri + item.poster_path;
-                    if (item.backdrop_path != null)
+                    foreach(var item in Result.Search)
                     {
-                        item.backdrop_path = BackdropImageBaseUri + item.backdrop_path;
+                        var uri = String.Format("http://img.omdbapi.com/?i={0}&apikey=c0150b20&h=1000", item.imdbID);
+                        item.Poster = uri;
+                        SearchList.Add(item);
                     }
-                    else
-                    {
-                        item.backdrop_path = item.poster_path;
-                    }
-                    SearchList.Add(item);
                 }
             }
             catch(Exception)
@@ -73,11 +66,11 @@ namespace MovieCollection.data
             string uri;
             if (page == 0)
             {
-                uri = String.Format("https://api.themoviedb.org/3/search/movie?api_key=341386d68f259dc87b0f767d00f06bb2&query={0}", SearchString);
+                uri = String.Format("http://www.omdbapi.com/?type=movie&s={0}", SearchString);
             }
             else
             {
-                uri = String.Format("https://api.themoviedb.org/3/search/movie?api_key=341386d68f259dc87b0f767d00f06bb2&page={0}&query={1}", page, SearchString);
+                uri = String.Format("http://www.omdbapi.com/?type=movie&page={0}&s={1}", page, SearchString);
             }
                 
             var response = await http.GetAsync(uri);

@@ -40,23 +40,9 @@
 
     <Grid Background="Transparent">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <TextBlock Text="IMDB Top 10" 
-                   FontSize="40"
-                   Margin="50,20"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Left"
-                   Foreground="White"
-                   />
-
         <ProgressRing Name="LodingRing"
                       Visibility="Collapsed"
                       IsActive="False"
-                      Grid.Row="1"
                       Height="50"
                       Width="50"
                       Opacity="0.5"
@@ -64,161 +50,164 @@
 
         <TextBlock Name="CanNotConnectWorning"
                    Visibility="Collapsed"
-                   Grid.Row="1"
                    Text="Can't Connect to the Internet!"
                    Foreground="White"
                    />
 
-        <FlipView ItemsSource="{x:Bind TopTenList}"
-                  Grid.Row="1"
-                  Background="Transparent"
-                  >
-            <FlipView.ItemTemplate>
-                <DataTemplate x:DataType="data:Movie">
-                    <Grid>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="VisualStateGroup">
-
-                                <VisualState x:Name="VisualStatePhone">
-                                    <VisualState.StateTriggers>
-                                        <AdaptiveTrigger MinWindowWidth="0"/>
-                                    </VisualState.StateTriggers>
-                                    <VisualState.Setters>
-                                        <Setter Target="MovieInfomationGrid.(Grid.ColumnSpan)" Value="2" />
-                                        <Setter Target="MovieInfomationGrid.(Grid.Column)" Value="0" />
-                                        <Setter Target="MovieInfomationGrid.(Grid.RowSpan)" Value="2" />
-                                        <Setter Target="MovieInfomationGrid.(Grid.Row)" Value="1" />
-                                    </VisualState.Setters>
-                                </VisualState>
-
-                                <VisualState x:Name="VisualStateTablet">
-                                    <VisualState.StateTriggers>
-                                        <AdaptiveTrigger MinWindowWidth="900" />
-                                    </VisualState.StateTriggers>
-                                    <VisualState.Setters>
-                                        <Setter Target="MovieInfomationGrid.(Grid.Row)" Value="0" />
-                                        <Setter Target="MovieInfomationGrid.(Grid.Column)" Value="1" />
-                                    </VisualState.Setters>
-                                </VisualState>
-
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                        
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="3*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <Image Name="PosterImage"
-                               Stretch="Uniform"
-                               Margin="70,0"
-                               Source="{x:Bind Poster}"
-                               MaxHeight="900"
+        <Pivot ItemsSource="{x:Bind DataList}"
+               Margin="10,50,10,0"
+               >
+            <Pivot.HeaderTemplate>
+                <DataTemplate x:DataType="data:HomePageData">
+                    <TextBlock Text="{x:Bind DataTitle}" 
+                               FontSize="36"
+                               FontWeight="Bold"
                                />
-                        <ScrollViewer Grid.Column="1"
-                                      VerticalScrollBarVisibility="Auto"
-                                      >
-                            <Grid Name="MovieInfomationGrid"
-                                  VerticalAlignment="Center"
-                                  >
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+            <Pivot.ItemTemplate>
+                <DataTemplate x:DataType="data:HomePageData">
+                    <FlipView Background="Transparent"
+                              ItemsSource="{x:Bind MovieList}"
+                              >
+                        <FlipView.ItemTemplate>
+                            <DataTemplate x:DataType="data:Movie">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="3*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
 
-                                <TextBlock Text="{x:Bind Title}"
+                                    <Image Name="PosterImage"
+                                           Stretch="Uniform"
+                                           Margin="70,0"
+                                           Source="{x:Bind Poster}"
+                                           MaxHeight="800"
+                                           />
+                                    <ScrollViewer Grid.Column="1"
+                                                  VerticalScrollBarVisibility="Auto"
+                                                  > 
+                                        <Grid Name="MovieInfomationGrid"
+                                              VerticalAlignment="Center"
+                                              >
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Text="{x:Bind Title}"
                                            Style="{StaticResource MovieTitleTextBlockStyle}"
                                            Grid.ColumnSpan="2"
                                            />
-                                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                                            <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                            Grid.Row="1"
                                            Text="Released:"
                                            />
-                                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                                            <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                            Grid.Row="1"
                                            Grid.Column="1"    
                                            Text="{x:Bind Released}"
                                            />
 
-                                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                                            <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                            Grid.Row="2"                         
                                            Text="imdbRating:"
                                            />
-                                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                                            <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                            Grid.Row="2"
                                            Grid.Column="1"
                                            Text="{x:Bind imdbRating}"
                                            />
 
-                                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                                            <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                            Grid.Row="3"    
                                            Text="Director:"
                                            />
-                                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                                            <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                            Grid.Row="3"
                                            Grid.Column="1"
                                            Text="{x:Bind Director}"
                                            />
 
-                                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                                            <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                            Grid.Row="4"
                                            Text="Writer:"
                                            />
-                                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                                            <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                            Grid.Row="4"
                                            Grid.Column="1"
                                            Text="{x:Bind Writer}"
                                            />
 
-                                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                                            <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                            Grid.Row="5"
                                            Text="Actors:"
                                            />
-                                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                                            <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                            Grid.Row="5"
                                            Grid.Column="1"
                                            Text="{x:Bind Actors}"
                                            />
 
-                                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                                            <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                            Grid.Row="6"
                                            Text="Awards:"
                                            />
-                                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                                            <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                            Grid.Row="6"
                                            Grid.Column="1"
                                            Text="{x:Bind Awards}"
                                            />
 
-                                <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
+                                            <TextBlock Style="{StaticResource ContentTitleTextBlockStyle}"
                                            Grid.Row="7"
                                            Text="Plot:"
                                            />
-                                <TextBlock Style="{StaticResource ContentTextBlockStyle}"
+                                            <TextBlock Style="{StaticResource ContentTextBlockStyle}"
                                            Grid.Row="7"
                                            Grid.Column="1"
                                            Text="{x:Bind Plot}"
                                            />
-                            </Grid>
-                        </ScrollViewer>
-                    </Grid>
+
+                                            <RelativePanel Grid.Row="8"
+                                                           Grid.ColumnSpan="2"
+                                                           >
+                                                <Button Name="DetailButton"
+                                                        BorderBrush="White"
+                                                        Content="Detail information"
+                                                        FontSize="30"
+                                                        Foreground="White"
+                                                        RelativePanel.AlignRightWithPanel="True"
+                                                        Margin="30"
+                                                        Click="DetailButton_Click"
+                                                        />
+                                            </RelativePanel>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </Grid>
+                            </DataTemplate>
+                        </FlipView.ItemTemplate>
+                    </FlipView>
                 </DataTemplate>
-            </FlipView.ItemTemplate>
-        </FlipView>
+            </Pivot.ItemTemplate>
+        </Pivot>
+
     </Grid>
 </Page>

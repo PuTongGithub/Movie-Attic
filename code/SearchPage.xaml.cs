@@ -61,6 +61,9 @@ namespace MovieCollection
                     Task t = GetSearchList.GetData(searchList, SearchBox.Text);
                     await t;
                     countPage++;
+                    t = GetSearchList.GetData(searchList, SearchBox.Text, countPage + 1);
+                    await t;
+                    countPage++;
                 }
                 catch (Exception) { }
                 finally
@@ -81,8 +84,9 @@ namespace MovieCollection
         }
 
         private void SearchResultList_ItemClick(object sender, ItemClickEventArgs e)
-        {           
-            Frame.Navigate(typeof(DetailedInfomationPage),e.ClickedItem);
+        {
+            var clickedMovie = (Search)e.ClickedItem;
+            Frame.Navigate(typeof(DetailedInfomationPage),clickedMovie.imdbID);
         }
 
         private async void SearchResultScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
