@@ -25,20 +25,33 @@ namespace MovieCollection
     /// </summary>
     public sealed partial class HomePage : Page
     {
-        private ObservableCollection<HomePageData> DataList;
+        private ObservableCollection<Movie> TopTenList;
         public HomePage()
         {
             this.InitializeComponent();
-            NavigationCacheMode = NavigationCacheMode.Enabled;
-            DataList = new ObservableCollection<HomePageData>();
-            GetHomePageDataList.SetDataList(DataList);
-            GetHomePageDataList.GetDataList(DataList);
+            TopTenList = new ObservableCollection<Movie>();
+            getData();
         }
 
-        private void DetailButton_Click(object sender, RoutedEventArgs e)
+        private async void getData()
         {
-            var movie = (Movie)(sender as Button).DataContext;
-            Frame.Navigate(typeof(DetailedInfomationPage), movie.imdbID);
+            LodingRing.Visibility = Visibility.Visible;
+            LodingRing.IsActive = true;
+            try
+            {
+                Task t = GetHomePageDataList.GetTopTenList(TopTenList);
+                await t;
+            }
+            catch (Exception)
+            {
+                CanNotConnectWorning.Visibility = Visibility.Visible;
+                return;
+            }
+            finally
+            {
+                LodingRing.Visibility = Visibility.Collapsed;
+                LodingRing.IsActive = false;
+            }
         }
     }
 }

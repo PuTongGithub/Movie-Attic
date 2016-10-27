@@ -312,7 +312,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid VerticalAlignment="Center"
                       Margin="30"
-                      >
+                      >     
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -557,7 +557,7 @@
                         </StackPanel>
                     </Button>
                 </Grid>
-
+                
             </Grid>
         </ScrollViewer>
     </Grid>

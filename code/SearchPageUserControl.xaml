@@ -38,7 +38,7 @@
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
 
-        <Image Source="{x:Bind Search.Poster}"
+        <Image Source="{x:Bind Search.poster_path}"
                Stretch="Uniform"
                Name="PosterImage"
                Margin="10"
@@ -48,7 +48,7 @@
                     VerticalAlignment="Center"
                     Name="SearchPageTextPanel"
                     >
-            <TextBlock Text="{x:Bind Search.Title}"
+            <TextBlock Text="{x:Bind Search.title}"
                        FontWeight="Bold"
                        TextWrapping="Wrap"
                        Name="TitleBlock"
@@ -56,12 +56,12 @@
                        Foreground="White"
                        />
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Year:"
+                <TextBlock Text="Release:"
                            Name="ContantTitleBlock"
                            FontSize="20"
                            Foreground="White"
                            />
-                <TextBlock Text="{x:Bind Search.Year}"
+                <TextBlock Text="{x:Bind Search.release_date}"
                            Name="ContantBlock"
                            FontSize="20"
                            Foreground="White"

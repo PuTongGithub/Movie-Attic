@@ -192,7 +192,6 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
                     <StackPanel Orientation="Horizontal"
@@ -233,29 +232,12 @@
                                Style="{StaticResource AboutTextBlockStyle}"
                                />
 
-
-                    <StackPanel Grid.Row="5"
-                                Margin="10,20"
-                                >
-                        <TextBlock Text="Movie recommendation power by"
-                                   Style="{StaticResource AboutTextBlockStyle}"
-                                   Margin="0,0,0,10"
-                                   VerticalAlignment="Center"
-                                   />
-
-                        <HyperlinkButton Content="TMDb"
-                                         NavigateUri="http://www.themoviedb.org/"
-                                         FontSize="20"
-                                         HorizontalAlignment="Center"
-                                         />
-                    </StackPanel>
-
-                    <TextBlock Grid.Row="6"
+                    <TextBlock Grid.Row="5"
                                Text="Special thanks to:"
                                Style="{StaticResource AboutTextBlockStyle}"
                                Margin="0,20,0,0"
                                />
-                    <StackPanel Grid.Row="7"
+                    <StackPanel Grid.Row="6"
                                 Orientation="Horizontal"
                                 Margin="20,0"
                                 >
@@ -269,12 +251,11 @@
                                    VerticalAlignment="Center"
                                    />
                     </StackPanel>
-                    <TextBlock Grid.Row="8"
+                    <TextBlock Grid.Row="7"
                                Text="Li Zhe--for providing logo icon"
                                Style="{StaticResource AboutTextBlockStyle}"
                                Margin="0"
                                />
-                    
 
                 </Grid>
             </SplitView.Pane>
