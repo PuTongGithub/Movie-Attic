@@ -39,21 +39,6 @@
     </Page.Resources>
 
     <Grid Background="Transparent">
-
-        <ProgressRing Name="LodingRing"
-                      Visibility="Collapsed"
-                      IsActive="False"
-                      Height="50"
-                      Width="50"
-                      Opacity="0.5"
-                      />
-
-        <TextBlock Name="CanNotConnectWorning"
-                   Visibility="Collapsed"
-                   Text="Can't Connect to the Internet!"
-                   Foreground="White"
-                   />
-
         <Pivot ItemsSource="{x:Bind DataList}"
                Margin="10,50,10,0"
                >

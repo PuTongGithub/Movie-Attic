@@ -64,6 +64,8 @@ namespace MovieCollection
                 AwardsTextBlock.Text = movie.Awards;
                 PlotTextBlock.Text = movie.Plot;
 
+                RatingSlider.Value = (int)float.Parse(movie.imdbRating);
+                SetTags(movie.Genre);
             }
             catch(Exception)
             {
@@ -74,6 +76,27 @@ namespace MovieCollection
                 LodingRing.IsActive = false;
                 LodingRing.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void SetTags(string tags)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach(var ch in tags)
+            {
+                if (ch == ',')
+                {
+                    var addTag = new ForTagsDataBind() { Tag = builder.ToString() };
+                    AddTagsList.Add(addTag);
+                    builder.Clear();
+                }
+                else if (ch == ' ') { }
+                else
+                {
+                    builder.Append(ch);
+                }
+            }
+            var AddTag = new ForTagsDataBind() { Tag = builder.ToString() };
+            AddTagsList.Add(AddTag);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
