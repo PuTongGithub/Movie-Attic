@@ -186,6 +186,12 @@ namespace MovieCollection
             MovieInformationGrid.Visibility = Visibility.Visible;
         }
 
+        private void ListView_ItemClick_Mobile(object sender, ItemClickEventArgs e)
+        {
+            movie = (CollectedMovie)e.ClickedItem;
+            Frame.Navigate(typeof(MoreInformationPage), movie);
+        }
+
         private void MoreInformationButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MoreInformationPage), movie);

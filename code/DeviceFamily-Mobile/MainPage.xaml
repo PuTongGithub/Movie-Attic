@@ -34,28 +34,26 @@
 
     <Grid>
         <Button Name="HamburgerButton"
-                    FontFamily="Segoe MDL2 Assets"
-                    Content="&#xE700;"
-                    Click="Button_Click"
-                    FontSize="30"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Left"
-                    Canvas.ZIndex="100"
-                    Background="Transparent"
-                    Foreground="White"
-                    />
-
+                FontFamily="Segoe MDL2 Assets"
+                Content="&#xE700;"
+                Click="Button_Click"
+                FontSize="30"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Canvas.ZIndex="100"
+                Background="Transparent"
+                Foreground="White"
+                />
 
         <SplitView Name="MainSplitView"
-                   CompactPaneLength="50"
                    OpenPaneLength="200"
                    Background="Transparent"
                    PaneBackground="#FF101010"
-                   DisplayMode="CompactOverlay"
+                   DisplayMode="Overlay"
                    >
             <SplitView.Pane>
                 <Grid Margin="0,42,0,0">
-                    <ListBox Name="HumburgerMainList"       
+                    <ListBox Name="HumburgerMainList"
                              SelectionChanged="HumburgerMainList_SelectionChanged"
                              Background="Transparent"
                              >
@@ -153,9 +151,9 @@
             <SplitView.Pane>
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                               VerticalScrollBarVisibility="Auto"
+                              FlowDirection="LeftToRight"
                               >
-                    <Grid FlowDirection="LeftToRight"
-                          HorizontalAlignment="Center"
+                    <Grid HorizontalAlignment="Center"
                           Margin="0,50,0,0"
                           >
 

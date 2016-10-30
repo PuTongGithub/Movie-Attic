@@ -1,0 +1,179 @@
+﻿<Page
+    x:Class="MovieCollection.CollectionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MovieCollection"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:MovieCollection.data"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="MovieInfomationTextBlockStyle">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="5,3,5,3" />
+            <Setter Property="MaxWidth" Value="420" />
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="MovieInfomationTitleTextBlockStyle">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="5,3,5,3" />
+            <Setter Property="MaxWidth" Value="420" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="Transparent" Margin="0,45,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Name="NoCollectionHit"
+                   Text="You don't have any collection!"
+                   Visibility="Collapsed"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   FontSize="24"
+                   TextAlignment="Center"
+                   Margin="0,10,0,0"
+                   TextWrapping="Wrap"
+                   />
+
+        <TextBlock Name="GoSearchHit"
+                   Text="Please add your movie collection by Search."
+                   Foreground="White"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="2"
+                   Visibility="Collapsed"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   FontSize="24"
+                   Canvas.ZIndex="100"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center"
+                   />
+
+        <Grid Visibility="Collapsed"
+              Name="ComboBoxesGrid"
+              >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ComboBox Name="SortClassComboBox"
+                      SelectionChanged="ClassComboBox_SelectionChanged"
+                      HorizontalAlignment="Center"
+                      Margin="0,5"
+                      MinWidth="250"
+                      >
+                <ComboBoxItem Content="Sort by..." IsSelected="True" />
+                <ComboBoxItem Content="Title" />
+                <ComboBoxItem Content="Rating" />
+                <ComboBoxItem Content="Year" />
+                <ComboBoxItem Content="Director" />
+                <ComboBoxItem Content="Tag" />
+            </ComboBox>
+
+            <ComboBox Name="SortItemComboBox"
+                      Visibility="Collapsed"
+                      HorizontalAlignment="Center"
+                      ItemsSource="{x:Bind SortItems}"
+                      Margin="0,5"
+                      Grid.Row="1"
+                      MinWidth="250"
+                      SelectionChanged="SortItemComboBox_SelectionChanged"
+                      >
+            </ComboBox>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      >
+            <ListView ItemsSource="{x:Bind showMovieList}"
+                      IsItemClickEnabled="True"
+                      ItemClick="ListView_ItemClick_Mobile"
+                      Visibility="Collapsed"
+                      Name="MoviesListView"
+                      >
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="data:CollectedMovie">
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="{x:Bind Poster}"
+                                   Stretch="Uniform"
+                                   Margin="5"
+                                   Height="150"
+                                   />
+
+                            <Grid Grid.Column="1"
+                                  VerticalAlignment="Center"
+                                  >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="{x:Bind Title}"
+                                           FontSize="20"
+                                           Foreground="White"
+                                           FontWeight="Bold"
+                                           TextWrapping="Wrap"
+                                           Margin="0,3"
+                                           />
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="1"
+                                            Margin="0,3"
+                                            >
+                                    <TextBlock Text="Year:"
+                                               Foreground="White"
+                                               />
+                                    <TextBlock Text="{x:Bind Year}"
+                                               Foreground="White"
+                                               />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="2"
+                                            Margin="0,3"
+                                            >
+                                    <TextBlock Text="Rating:"
+                                               Foreground="White"
+                                               />
+                                    <TextBlock Text="{x:Bind RatingSum}"
+                                               Foreground="White"
+                                               />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="3"
+                                            Margin="0,3"
+                                            >
+                                    <TextBlock Text="Director:"
+                                               Foreground="White"
+                                               />
+                                    <TextBlock Text="{x:Bind Director}"
+                                               Foreground="White"
+                                               TextWrapping="Wrap"
+                                               />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
+    </Grid>
+</Page>

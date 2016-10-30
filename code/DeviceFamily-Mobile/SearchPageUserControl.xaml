@@ -9,42 +9,40 @@
     d:DesignHeight="200"
     d:DesignWidth="250">
 
-    <Grid Width="400" Height="200">
+    <Grid Width="300" Height="150">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
         <Image Source="{x:Bind Search.Poster}"
                Stretch="Uniform"
-               Name="PosterImage"
-               Margin="10"
+               Margin="5"
                />
 
         <StackPanel Grid.Column="1"
                     VerticalAlignment="Center"
-                    Name="SearchPageTextPanel"
                     >
             <TextBlock Text="{x:Bind Search.Title}"
                        FontWeight="Bold"
                        TextWrapping="Wrap"
                        Name="TitleBlock"
-                       FontSize="26"
+                       FontSize="22"
                        Foreground="White"
                        />
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Year:"
                            Name="ContantTitleBlock"
-                           FontSize="20"
+                           FontSize="16"
                            Foreground="White"
                            />
                 <TextBlock Text="{x:Bind Search.Year}"
                            Name="ContantBlock"
-                           FontSize="20"
+                           FontSize="16"
                            Foreground="White"
                            />
-            </StackPanel>            
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

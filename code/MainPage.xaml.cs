@@ -16,6 +16,9 @@ using Windows.UI.Xaml.Navigation;
 using MovieCollection.data;
 using Windows.UI;
 using Windows.System;
+using Windows.UI.ViewManagement;
+using Windows.System.Profile;
+using Windows.UI.Core;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -28,6 +31,11 @@ namespace MovieCollection
     {
         public MainPage()
         {
+            if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
+            {
+                ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+            }
+
             this.InitializeComponent();
 
             CollectedMovieTagList.GetTagList();
@@ -37,7 +45,7 @@ namespace MovieCollection
             HumburgerMainList.SelectedIndex = 0;
             
             var coreTitleBar = Windows.ApplicationModel.Core.CoreApplication.GetCurrentView().TitleBar;
-            var appTitleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;
+            var appTitleBar = ApplicationView.GetForCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
             appTitleBar.ButtonBackgroundColor = Colors.Transparent;
             appTitleBar.ButtonForegroundColor = Colors.White;

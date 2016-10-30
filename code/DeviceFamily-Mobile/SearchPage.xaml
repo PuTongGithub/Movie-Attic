@@ -8,34 +8,8 @@
     xmlns:data="using:MovieCollection.data"
     mc:Ignorable="d">
 
-    <Grid Background="Transparent">
+    <Grid Background="Transparent" Margin="0,30,0,0">
 
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="VisualStateGroup">
-
-                <VisualState x:Name="VisualStatePhone">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="SearchBox.MinWidth" Value="250" />
-                        <Setter Target="SearchBox.Margin" Value="10,20" />
-                    </VisualState.Setters>
-                </VisualState>
-
-                <VisualState x:Name="VisualStateTablet">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="900" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="SearchBox.MinWidth" Value="650" />
-                        <Setter Target="SearchBox.Margin" Value="100,50" />
-                    </VisualState.Setters>
-                </VisualState>
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -45,6 +19,8 @@
                         PlaceholderText="Search"
                         QueryIcon="Find"
                         QuerySubmitted="SearchBox_QuerySubmitted"
+                        Margin="10,20"
+                        MinWidth="250"
                         HorizontalAlignment="Center"
                         />
 
@@ -66,8 +42,9 @@
                    Foreground="White"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top"
-                   FontSize="30"
-                   Margin="20"
+                   FontSize="24"
+                   Margin="0,20,0,0"
+                   TextWrapping="Wrap"
                    />
 
         <TextBlock Name="MoreLettersWorning"
@@ -77,8 +54,10 @@
                    Foreground="White"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top"
-                   FontSize="30"
-                   Margin="20"
+                   TextWrapping="Wrap"
+                   FontSize="24"
+                   Margin="0,20,0,0"
+                   TextAlignment="Center"
                    />
 
         <ScrollViewer Name="SearchResultScrollViewer"
@@ -92,7 +71,6 @@
                       IsItemClickEnabled="True"
                       SelectionMode="None"
                       ItemClick="SearchResultList_ItemClick"
-                      Margin="50,0,0,0"
                       >
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="data:Search">

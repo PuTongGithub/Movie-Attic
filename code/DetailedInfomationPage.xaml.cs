@@ -165,15 +165,18 @@ namespace MovieCollection
             if(PictureRatingSlider.Value==0&& StoryRatingSlider.Value == 0&&
                 MusicRatingSlider.Value == 0&& PerformanceRatingSlider.Value == 0)
             {
-                PictureRatingSlider.Value = RatingSlider.Value;
-                StoryRatingSlider.Value = RatingSlider.Value;
-                MusicRatingSlider.Value = RatingSlider.Value;
-                PerformanceRatingSlider.Value = RatingSlider.Value;
-            } 
-            NewCollectedMovie.RatingPicture = ((int)PictureRatingSlider.Value).ToString();
-            NewCollectedMovie.RatingStory = ((int)StoryRatingSlider.Value).ToString();
-            NewCollectedMovie.RatingMusic = ((int)MusicRatingSlider.Value).ToString();
-            NewCollectedMovie.RatingPerformance = ((int)PerformanceRatingSlider.Value).ToString();
+                NewCollectedMovie.RatingPicture = ((int)RatingSlider.Value).ToString();
+                NewCollectedMovie.RatingStory = ((int)RatingSlider.Value).ToString();
+                NewCollectedMovie.RatingMusic = ((int)RatingSlider.Value).ToString();
+                NewCollectedMovie.RatingPerformance = ((int)RatingSlider.Value).ToString();
+            }
+            else
+            {
+                NewCollectedMovie.RatingPicture = ((int)PictureRatingSlider.Value).ToString();
+                NewCollectedMovie.RatingStory = ((int)StoryRatingSlider.Value).ToString();
+                NewCollectedMovie.RatingMusic = ((int)MusicRatingSlider.Value).ToString();
+                NewCollectedMovie.RatingPerformance = ((int)PerformanceRatingSlider.Value).ToString();
+            }
 
             StringBuilder tags = new StringBuilder(";");
             var TagList = CollectedMovieTagList.TagList;
