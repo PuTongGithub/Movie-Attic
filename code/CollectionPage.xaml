@@ -14,7 +14,6 @@
             <Setter Property="FontSize" Value="20" />
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="Margin" Value="5,3,5,3" />
-            <Setter Property="MaxWidth" Value="420" />
         </Style>
 
         <Style TargetType="TextBlock" x:Key="MovieInfomationTitleTextBlockStyle">
@@ -22,7 +21,6 @@
             <Setter Property="FontSize" Value="20" />
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="Margin" Value="5,3,5,3" />
-            <Setter Property="MaxWidth" Value="420" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
     </Page.Resources>
@@ -32,14 +30,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" MinWidth="400" />
-            <ColumnDefinition Width="3*" />
-        </Grid.ColumnDefinitions>
 
         <TextBlock Name="NoCollectionHit"
                    Text="You don't have any collection!"
-                   Grid.ColumnSpan="2"
                    Visibility="Collapsed"
                    Foreground="White"
                    HorizontalAlignment="Center"
@@ -52,7 +45,6 @@
                    Text="Please add your movie collection by Search."
                    Foreground="White"
                    Grid.Row="1"
-                   Grid.ColumnSpan="2"
                    Visibility="Collapsed"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top"
@@ -61,8 +53,7 @@
                    Canvas.ZIndex="100"
                    />
 
-        <Grid Grid.ColumnSpan="2"
-              Name="ComboBoxesGrid"
+        <Grid Name="ComboBoxesGrid"
               Visibility="Collapsed"
               >
             <Grid.ColumnDefinitions>
@@ -96,41 +87,45 @@
             </ComboBox>
         </Grid>
 
-        <ScrollViewer Grid.Row="1"
-                      VerticalScrollBarVisibility="Hidden"
-                      >
-            <ListView ItemsSource="{x:Bind showMovieList}"
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <ListView ItemsSource="{x:Bind showMovieList}"
                       Margin="20"
                       IsItemClickEnabled="True"
                       ItemClick="ListView_ItemClick"
                       Name="MoviesListView"
                       Visibility="Collapsed"
                       >
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="data:CollectedMovie">
-                        <Grid Margin="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="3*" />
-                            </Grid.ColumnDefinitions>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="data:CollectedMovie">
+                            <Grid Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="3*" />
+                                </Grid.ColumnDefinitions>
 
-                            <Image Source="{x:Bind Poster}"
+                                <Image Source="{x:Bind Poster}"
                                    Stretch="Uniform"
                                    Margin="5"
                                    Height="150"
                                    />
 
-                            <Grid Grid.Column="1"
+                                <Grid Grid.Column="1"
                                   VerticalAlignment="Center"
                                   >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
 
-                                <TextBlock Text="{x:Bind Title}"
+                                    <TextBlock Text="{x:Bind Title}"
                                            FontSize="20"
                                            Foreground="White"
                                            FontWeight="Bold"
@@ -138,68 +133,59 @@
                                            Margin="5,3"
                                            />
 
-                                <StackPanel Orientation="Horizontal"
+                                    <StackPanel Orientation="Horizontal"
                                             Grid.Row="1"
                                             Margin="5,3"
                                             >
-                                    <TextBlock Text="Year:"
+                                        <TextBlock Text="Year:"
                                                Foreground="White"
                                                />
-                                    <TextBlock Text="{x:Bind Year}"
+                                        <TextBlock Text="{x:Bind Year}"
                                                Foreground="White"
                                                />
-                                </StackPanel>
+                                    </StackPanel>
 
-                                <StackPanel Orientation="Horizontal"
+                                    <StackPanel Orientation="Horizontal"
                                             Grid.Row="2"
                                             Margin="5,3"
                                             >
-                                    <TextBlock Text="Rating:"
+                                        <TextBlock Text="Rating:"
                                                Foreground="White"
                                                />
-                                    <TextBlock Text="{x:Bind RatingSum}"
+                                        <TextBlock Text="{x:Bind RatingSum}"
                                                Foreground="White"
                                                />
-                                </StackPanel>
+                                    </StackPanel>
 
-                                <StackPanel Orientation="Horizontal"
-                                            Grid.Row="3"
+                                    <StackPanel Grid.Row="3"
                                             Margin="5,3"
                                             >
-                                    <TextBlock Text="Director:"
+                                        <TextBlock Text="Director:"
                                                Foreground="White"
                                                />
-                                    <TextBlock Text="{x:Bind Director}"
+                                        <TextBlock Text="{x:Bind Director}"
                                                Foreground="White"
                                                TextWrapping="Wrap"
                                                />
-                                </StackPanel>
+                                    </StackPanel>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </ScrollViewer>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
 
-        <ScrollViewer Grid.Column="1"
-                      Grid.Row="1"
-                      Margin="20"
-                      VerticalScrollBarVisibility="Hidden"
-                      HorizontalScrollBarVisibility="Auto"
-                      HorizontalAlignment="Stretch"
+            <ScrollViewer Grid.Column="1"
+                          Margin="20"
+                          VerticalScrollBarVisibility="Auto"
+                          >
+                <Grid Name="MovieInformationGrid"
+                      Visibility="Collapsed"
                       >
-            <Grid Name="MovieInformationGrid"
-                  Visibility="Collapsed"
-                  >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <Grid Margin="10">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -213,14 +199,14 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    
 
                     <Image Name="PosterImage"
                            Margin="10"
                            Stretch="Uniform"
-                           Height="400"
+                           MaxHeight="500"
+                           MaxWidth="400"
                            Grid.RowSpan="9"
                            />
 
@@ -232,7 +218,6 @@
                                FontWeight="Bold"
                                TextWrapping="Wrap"
                                Margin="5"
-                               HorizontalAlignment="Left"
                                />
 
                     <TextBlock Text="Released:"
@@ -325,73 +310,62 @@
                                 Style="{StaticResource MovieInfomationTextBlockStyle}"
                                 />
 
-                </Grid>
-
-                <TextBlock Text="Film Critic:"
-                           HorizontalAlignment="Left"
+                    <TextBlock Text="Film Critic:"
+                           Grid.Row="9"
+                           Grid.ColumnSpan="3"
                            Foreground="White"
                            FontSize="20"
                            Margin="20,5"
-                           Grid.Row="1"
                            FontWeight="Bold"
                            />
 
-                <TextBlock Name="FilmCriticTextBlock"
-                           HorizontalAlignment="Left"
+                    <TextBlock Name="FilmCriticTextBlock"
                            TextWrapping="Wrap"
                            Foreground="White"
                            FontSize="20"
                            Margin="20,5"
-                           Grid.Row="2"
-                           MaxWidth="800"
+                           Grid.Row="10"
+                           Grid.ColumnSpan="3"
                            />
 
-                <RelativePanel Grid.Row="3"
-                               Margin="40"
-                               >
-                    <Button Name="MoreInformationButton"
-                            BorderBrush="White"
-                            Content="More Information"
-                            FontSize="20"
-                            Foreground="White"
-                            RelativePanel.AlignRightWithPanel="True"
-                            Margin="20,0"
-                            Click="MoreInformationButton_Click"
-                            />
-
-                    <Button Name="DeleteButton"
+                    <StackPanel Margin="40"
+                                Grid.Row="11"
+                                Grid.ColumnSpan="3"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                >
+                        <Button Name="DeleteButton"
                             BorderBrush="White"
                             Content="Delete"
                             FontSize="20"
                             Foreground="White"
-                            RelativePanel.LeftOf="MoreInformationButton"
                             Margin="20,0"
                             >
-                        <Button.Flyout>
-                            <Flyout x:Name="DeleteButtonFlyout">
-                                <Flyout.FlyoutPresenterStyle>
-                                    <Style TargetType="FlyoutPresenter">
-                                        <Setter Property="Background" Value="#FF101010" />
-                                        <Setter Property="BorderBrush" Value="Black" />
-                                    </Style>
-                                </Flyout.FlyoutPresenterStyle>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
+                            <Button.Flyout>
+                                <Flyout x:Name="DeleteButtonFlyout">
+                                    <Flyout.FlyoutPresenterStyle>
+                                        <Style TargetType="FlyoutPresenter">
+                                            <Setter Property="Background" Value="#FF101010" />
+                                            <Setter Property="BorderBrush" Value="Black" />
+                                        </Style>
+                                    </Flyout.FlyoutPresenterStyle>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="This movie will be DELETED!"
+                                        <TextBlock Text="This movie will be DELETED!"
                                                Grid.ColumnSpan="2"
                                                Foreground="White"
                                                Margin="10"
                                                />
 
-                                    <Button Name="DeleteYes"
+                                        <Button Name="DeleteYes"
                                             Content="Yes"
                                             Grid.Row="1"
                                             Margin="5"
@@ -400,7 +374,7 @@
                                             HorizontalAlignment="Stretch"
                                             Click="DeleteYes_Click"
                                             />
-                                    <Button Name="DeleteNo"
+                                        <Button Name="DeleteNo"
                                             Content="No"
                                             Grid.Row="1"
                                             Grid.Column="1"
@@ -410,12 +384,23 @@
                                             HorizontalAlignment="Stretch"
                                             Click="DeleteNo_Click"
                                             />
-                                </Grid>
-                            </Flyout>
-                        </Button.Flyout>
-                    </Button>
-                </RelativePanel>
-            </Grid>
-        </ScrollViewer>
+                                    </Grid>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+
+                        <Button Name="MoreInformationButton"
+                            BorderBrush="White"
+                            Content="More Information"
+                            FontSize="20"
+                            Foreground="White"
+                            Margin="20,0"
+                            Click="MoreInformationButton_Click"
+                            />
+
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Page>

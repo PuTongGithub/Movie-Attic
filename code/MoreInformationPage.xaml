@@ -105,18 +105,18 @@
                                                Style="{StaticResource CollectionPaneTextBlock}"
                                                />
                             <Slider Name="RatingSlider"
-                                            ValueChanged="RatingSlider_ValueChanged"
-                                            Grid.Column="1"
-                                            Style="{StaticResource RatingSliderStyle}"
-                                            />
+                                    ValueChanged="RatingSlider_ValueChanged"
+                                    Grid.Column="1"
+                                    Style="{StaticResource RatingSliderStyle}"
+                                    />
                             <TextBlock Name="RatingNumberTextBlock"
-                                           Text="0"
-                                           FontSize="24"
-                                           Foreground="White"
-                                           Grid.Column="2"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           />
+                                       Text="0"
+                                       FontSize="24"
+                                       Foreground="White"
+                                       Grid.Column="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       />
 
                             <Button Content="More"
                                         FontSize="14"
@@ -260,7 +260,9 @@
             </SplitView.Pane>
         </SplitView>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      Margin="0,50,0,0"
+                      >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -467,6 +469,7 @@
                                Style="{StaticResource ContentTextBlockStyle}"
                                Margin="50,10"
                                RelativePanel.AlignLeftWithPanel="True"
+                               FontWeight="Bold"
                                />
                     <Button Name="EditButton"
                             Background="Transparent"

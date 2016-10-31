@@ -74,7 +74,7 @@ namespace MovieCollection
             PerformanceRatingSlider.Value = Convert.ToInt32(movie.RatingPerformance);
             getTags();
             FilmCriticTextBox.Text = movie.FilmCritic;
-
+            RatingNumberTextBlock.Text = ((int)RatingSlider.Value).ToString();
         }
 
         private void getTags()
@@ -154,15 +154,18 @@ namespace MovieCollection
             if (PictureRatingSlider.Value == 0 && StoryRatingSlider.Value == 0 &&
                 MusicRatingSlider.Value == 0 && PerformanceRatingSlider.Value == 0)
             {
-                PictureRatingSlider.Value = RatingSlider.Value;
-                StoryRatingSlider.Value = RatingSlider.Value;
-                MusicRatingSlider.Value = RatingSlider.Value;
-                PerformanceRatingSlider.Value = RatingSlider.Value;
+                movie.RatingPicture = ((int)RatingSlider.Value).ToString();
+                movie.RatingStory = ((int)RatingSlider.Value).ToString();
+                movie.RatingMusic = ((int)RatingSlider.Value).ToString();
+                movie.RatingPerformance = ((int)RatingSlider.Value).ToString();
             }
-            movie.RatingPicture = ((int)PictureRatingSlider.Value).ToString();
-            movie.RatingStory = ((int)StoryRatingSlider.Value).ToString();
-            movie.RatingMusic = ((int)MusicRatingSlider.Value).ToString();
-            movie.RatingPerformance = ((int)PerformanceRatingSlider.Value).ToString();
+            else
+            {
+                movie.RatingPicture = ((int)PictureRatingSlider.Value).ToString();
+                movie.RatingStory = ((int)StoryRatingSlider.Value).ToString();
+                movie.RatingMusic = ((int)MusicRatingSlider.Value).ToString();
+                movie.RatingPerformance = ((int)PerformanceRatingSlider.Value).ToString();
+            }
 
             StringBuilder tags = new StringBuilder(";");
             var TagList = CollectedMovieTagList.TagList;
